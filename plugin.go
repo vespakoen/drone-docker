@@ -52,7 +52,7 @@ type (
 
 // Exec executes the plugin step
 func (p Plugin) Exec() error {
-
+	fmt.Fprintf(os.Stdout, "You are running a custom build of the drone-docker plugin by @vespakoen")
 	// start the Docker daemon server
 	if !p.Daemon.Disabled {
 		cmd := commandDaemon(p.Daemon)
@@ -123,6 +123,8 @@ const dockerExe = "/usr/local/bin/docker"
 
 // helper function to create the docker login command.
 func commandLogin(login Login) *exec.Cmd {
+	fmt.Fprintf(os.Stdout, "Logging in to registry: %s with user: %s and email: %s\n", login.Registry, login.Username, login.Email)
+
 	if login.Email != "" {
 		return commandLoginEmail(login)
 	}
